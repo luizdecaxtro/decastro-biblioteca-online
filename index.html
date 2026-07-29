@@ -36,6 +36,8 @@
   .msg{ min-height:18px; font-size:13px; margin:10px 2px 0; } .msg.err{ color:var(--err); } .msg.ok{ color:var(--ok); } .msg.warn{ color:var(--warn); }
   .switch{ text-align:center; margin-top:16px; font-size:13px; color:var(--ink-soft); } .switch a{ color:var(--brass-deep); font-weight:700; cursor:pointer; text-decoration:none; }
   .hint{ font-size:12px; color:var(--ink-mute); margin-top:12px; line-height:1.5; }
+  .aviso{ background:#fbf2dc; border:1px solid rgba(154,106,18,.30); color:#7a560f; font-size:12.5px; line-height:1.55; border-radius:10px; padding:11px 13px; margin-top:14px; text-align:left; }
+  .aviso b{ color:#6a4a0d; }
   .hidden{ display:none!important; }
 
   /* ---------- APP ---------- */
@@ -98,9 +100,9 @@
       <h3>Assine e leia todos os livros</h3>
       <p class="desc">Ao assinar, você recebe um código de acesso para ler toda a biblioteca DeCastro pelo tempo da sua assinatura.</p>
       <button class="btn pay" onclick="irPagar()">Assinar pelo InfinitePay</button>
-      <div class="hint">Após concluir o pagamento, você receberá o seu código de acesso. Guarde-o para entrar aqui.</div>
+      <div class="aviso"><b>Importante:</b> no pagamento, use o <b>mesmo e-mail</b> com que você vai entrar aqui. Depois de pagar, você recebe o seu <b>código de acesso</b>. Se demorar, é só enviar o comprovante pelo WhatsApp que a gente libera.</div>
       <button class="btn sec" style="margin-top:14px" onclick="mostrar('scLogin')">Já tenho um código</button>
-      <div class="switch" style="margin-top:14px">Dúvidas? <a id="waLink" target="_blank" rel="noopener">Fale no WhatsApp</a></div>
+      <div class="switch" style="margin-top:14px">Já paguei? <a id="waLink" target="_blank" rel="noopener">Enviar comprovante no WhatsApp</a></div>
     </div>
 
     <div id="scRenovar" style="display:none">
@@ -312,7 +314,7 @@ if("serviceWorker" in navigator){ window.addEventListener("load",()=>navigator.s
 
 /* ===== início ===== */
 (function boot(){
-  $("waLink").href="https://wa.me/"+CONFIG.WHATSAPP;
+  $("waLink").href="https://wa.me/"+CONFIG.WHATSAPP+"?text="+encodeURIComponent("Olá! Fiz o pagamento da assinatura DeCastro Leitura Online. O e-mail que quero usar para acessar é: ");
   const s=lerSessao();
   if(s&&s.expira_em&&s.expira_em>nowSec()){
     abrirApp(s.expira_em,s.nome);
@@ -326,3 +328,4 @@ if("serviceWorker" in navigator){ window.addEventListener("load",()=>navigator.s
 </script>
 </body>
 </html>
+
